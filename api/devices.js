@@ -16,10 +16,14 @@ export default async function handler(req, res) {
         const device = await redis.hgetall(key);
         if (device) {
             const id = key.replace('device:', '');
+            
+            // Cek status online dari key online:xxx
             const lastPing = await redis.get(`online:${id}`);
+            const isOnline = lastPing && (Date.now() - parseInt(lastPing)) < 30000;
+            
             devices.push({
                 ...device,
-                online: lastPing && (Date.now() - parseInt(lastPing)) < 30000,
+                online: isOnline,
                 last_ping: lastPing ? new Date(parseInt(lastPing)).toLocaleTimeString() : '-'
             });
         }
