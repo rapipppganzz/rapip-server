@@ -1,8 +1,10 @@
 import { Redis } from '@upstash/redis';
 
+// ==================== CONFIG LANGSUNG ====================
+const BOT_TOKEN = '8623003156:AAFsd5zkSR48lUsptLGop1rZFUTfbU3Gkh8';  // ← Ganti token lo
+const ADMIN_CHAT_ID = 7206573112;                            // ← Ganti chat ID lo
+
 const redis = Redis.fromEnv();
-const BOT_TOKEN = process.env.BOT_TOKEN;
-const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID;
 
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
